@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class StudentDAOImpl implements StudentDAO{
+public class StudentDAOImpl implements StudentDAO {
 
     private final EntityManager entityManager;
 
@@ -43,5 +43,24 @@ public class StudentDAOImpl implements StudentDAO{
         searchQuery.setParameter("Data", lastName);
 
         return searchQuery.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void update(Student theStudent) {
+        entityManager.merge(theStudent);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Integer id) {
+        Student theStudent = entityManager.find(Student.class, id);
+        entityManager.remove(theStudent);
+    }
+
+    @Override
+    @Transactional
+    public int clearTable() {
+        return entityManager.createQuery("DELETE FROM Student").executeUpdate();
     }
 }
