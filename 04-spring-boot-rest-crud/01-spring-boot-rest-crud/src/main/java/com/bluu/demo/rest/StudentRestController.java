@@ -1,7 +1,9 @@
 package com.bluu.demo.rest;
 
 import com.bluu.demo.entity.Student;
+import jakarta.annotation.PostConstruct;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,14 +14,24 @@ import java.util.List;
 @RequestMapping("/api")
 public class StudentRestController {
 
+    private List<Student> studentList;
+
+
+    @PostConstruct
+    public void loadData() {
+        studentList = new ArrayList<>();
+        studentList.add(new Student("John", "Doe"));
+        studentList.add(new Student("James", "Bond"));
+        studentList.add(new Student("Mary", "Smith"));
+    }
+
     @GetMapping("/students")
     public List<Student> getStudents() {
+        return studentList;
+    }
 
-        List<Student> theStudents = new ArrayList<>();
-        theStudents.add(new Student("John", "Doe"));
-        theStudents.add(new Student("James", "Bond"));
-        theStudents.add(new Student("Mary", "Smith"));
-
-        return theStudents;
+    @GetMapping("/students/{studentId}")
+    public Student getStudent(@PathVariable int studentId) {
+        return studentList.get(studentId);
     }
 }
