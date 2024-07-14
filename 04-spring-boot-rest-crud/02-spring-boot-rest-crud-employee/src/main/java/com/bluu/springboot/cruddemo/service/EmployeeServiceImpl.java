@@ -2,6 +2,7 @@ package com.bluu.springboot.cruddemo.service;
 
 import com.bluu.springboot.cruddemo.dao.EmployeeDAO;
 import com.bluu.springboot.cruddemo.entity.Employee;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
 
-    private EmployeeDAO employeeDAO;
+    private final EmployeeDAO employeeDAO;
 
     public EmployeeServiceImpl(EmployeeDAO employeeDAO){
         this.employeeDAO = employeeDAO;
@@ -18,5 +19,22 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public List<Employee> findAllEmployees() {
         return employeeDAO.findAllEmployees();
+    }
+
+    @Override
+    public Employee findById(int id) {
+        return employeeDAO.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public Employee save(Employee employee) {
+        return employeeDAO.save(employee);
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(int id) {
+        employeeDAO.deleteById(id);
     }
 }
