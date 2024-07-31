@@ -7,4 +7,4 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource(path="memebers")
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
-}
+}   
