@@ -2,8 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Thymeleaf Demo</title>
+    <link rel="stylesheet"
+          th:href="@{css/demo.css}" />
 </head>
 <body>
-    <p th:text="'The date on the server is: ' + ${date}"/>
+
+Thank you for submitting the form!
+<br>
+Have a nice day, <span th:text="${param.name}"/>
+
 </body>
 </html>
