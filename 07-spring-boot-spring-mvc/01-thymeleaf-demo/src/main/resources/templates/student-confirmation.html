@@ -8,12 +8,17 @@
 <body>
 
 Form submitted succesfully!
+<br><br>
+Have a nice day, <span th:text="${student.firstName}" /> from <span th:text="${student.country}"/>.
+<br><br>
+Preferred programming language:
+<span th:text="${student.prefLang}"/>
+<br><br>
+Preferred Operating systems:
 <br>
-Have a nice day, <span th:text="${student.firstName}"/>
-
-<br>
-
-Country: <span th:text="${student.country}"/>
+<ul>
+    <li th:each="tempSystem : ${student.prefSystems}" th:text="${tempSystem}" />
+</ul>
 
 </body>
 </html>
