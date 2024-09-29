@@ -1,5 +1,6 @@
 package com.bluu.springdemo.mvc.model;
 
+import com.bluu.springdemo.mvc.validation.CourseCode;
 import jakarta.validation.constraints.*;
 
 public class Customer {
@@ -16,6 +17,17 @@ public class Customer {
 
     @Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "Postal code invalid")
     private String postalCode;
+
+    @CourseCode
+    private String givenCode;
+
+    public String getGivenCode() {
+        return givenCode;
+    }
+
+    public void setGivenCode(String givenCode) {
+        this.givenCode = givenCode;
+    }
 
     public @Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "Postal code invalid") String getPostalCode() {
         return postalCode;
