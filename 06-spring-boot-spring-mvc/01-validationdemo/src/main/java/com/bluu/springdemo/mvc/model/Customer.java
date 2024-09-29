@@ -27,7 +27,7 @@ public class Customer {
 
     @Min(value = 1, message = "Enter a number between 1-100")
     @Max(value = 100, message = "Enter a number between 1-100")
-    
+
     public Integer getAge() {
         return age;
     }
