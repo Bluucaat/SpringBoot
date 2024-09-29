@@ -3,6 +3,7 @@ package com.bluu.springdemo.mvc.controller;
 
 import com.bluu.springdemo.mvc.model.Customer;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
