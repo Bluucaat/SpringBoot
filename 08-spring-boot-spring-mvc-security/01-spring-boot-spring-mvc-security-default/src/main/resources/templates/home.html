@@ -1,20 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Company homepage</title>
 </head>
 <body>
-    <h2>Company Home Page</h2>
-    <hr>
-    <p>
+<h2>Company Home Page</h2>
+<hr>
+<p>
     Welcome to the home page!
-    </p>
-<footer>
-    <form action="#" method="POST" th:action="@{/logout}">
-        <input type="submit" value="Log out"/>
-    </form>
-</footer>
+</p>
+
+<hr>
+<p> Welcome, <span sec:authentication="principal.username"></span>
+    <br><br>
+    Your role(s): <span sec:authentication="principal.authorities"></span>
+</p>
+<form action="#" method="POST" th:action="@{/logout}">
+    <input type="submit" value="Log out"/>
+</form>
 
 </body>
 </html>
