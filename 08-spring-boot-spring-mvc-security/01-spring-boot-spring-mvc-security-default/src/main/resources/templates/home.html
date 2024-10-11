@@ -11,8 +11,13 @@
 <p>
     Welcome to the home page!
 </p>
-
+<p>
+    <a th:href="@{/leaders}">Leadership Meeting</a>
+</p>
 <hr>
+<p>
+    <a th:href="@{/systems}">IT systems meeting</a>
+</p>
 <p> Welcome, <span sec:authentication="principal.username"></span>
     <br><br>
     Your role(s): <span sec:authentication="principal.authorities"></span>

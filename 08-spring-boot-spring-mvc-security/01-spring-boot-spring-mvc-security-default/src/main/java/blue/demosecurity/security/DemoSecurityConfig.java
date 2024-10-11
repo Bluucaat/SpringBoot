@@ -33,14 +33,21 @@ public class DemoSecurityConfig {
 
         return new InMemoryUserDetailsManager(john, mary, susan);
     }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(configurer ->  configurer.anyRequest().authenticated())
+        http.authorizeHttpRequests(configurer ->
+                        configurer
+                                .requestMatchers("/").hasRole("EMPLOYEE")
+                                .requestMatchers("/leaders/**").hasRole("MANAGER")
+                                .requestMatchers("/systems/**").hasRole("ADMIN")
+                                .anyRequest().authenticated())
                 .formLogin(form -> form.loginPage("/loginPage")
                         .loginProcessingUrl("/authenticate")
                         .permitAll()
                 )
-                .logout(LogoutConfigurer::permitAll);
-    return http.build();
+                .logout(LogoutConfigurer::permitAll)
+                .exceptionHandling(configurer -> configurer.accessDeniedPage("/access-denied"));
+        return http.build();
     }
 }
