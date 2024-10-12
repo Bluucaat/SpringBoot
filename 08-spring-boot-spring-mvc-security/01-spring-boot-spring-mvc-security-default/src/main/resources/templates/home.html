@@ -7,17 +7,19 @@
 </head>
 <body>
 <h2>Company Home Page</h2>
-<hr>
 <p>
     Welcome to the home page!
 </p>
-<p>
-    <a th:href="@{/leaders}">Leadership Meeting</a>
-</p>
-<hr>
-<p>
-    <a th:href="@{/systems}">IT systems meeting</a>
-</p>
+<div sec:authorize="hasRole('MANAGER')">
+    <p>
+        <a th:href="@{/leaders}">Leadership Meeting</a>
+    </p>
+</div>
+<div sec:authorize="hasRole('ADMIN')">
+    <p>
+        <a th:href="@{/systems}">IT systems meeting</a>
+    </p>
+</div>
 <p> Welcome, <span sec:authentication="principal.username"></span>
     <br><br>
     Your role(s): <span sec:authentication="principal.authorities"></span>
