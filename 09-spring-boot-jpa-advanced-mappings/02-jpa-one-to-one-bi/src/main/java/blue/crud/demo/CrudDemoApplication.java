@@ -1,14 +1,11 @@
 package blue.crud.demo;
 
 import blue.crud.demo.dao.ApplicationDAO;
-import blue.crud.demo.dao.DAOImpl;
 import blue.crud.demo.entity.Instructor;
 import blue.crud.demo.entity.InstructorDetail;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
@@ -24,9 +21,14 @@ public class CrudDemoApplication {
 			//createInstructor(appDAO);
 			//findInstructor(appDAO);
 			//deleteInstructor(appDAO);
-			findInstructorDetails(appDAO, 2);
-			findInstructorDetails(appDAO, 3);
+			//findInstructorDetails(appDAO, 2);
+			//findInstructorDetails(appDAO, 3);
+			deleteInstructorDetail(appDAO, 7);
 		};
+	}
+
+	private void deleteInstructorDetail(ApplicationDAO appDAO, int id) {
+		appDAO.deleteInstructorDetailById(id);
 	}
 
 	private void findInstructorDetails(ApplicationDAO appDAO, int id) {
@@ -55,7 +57,7 @@ public class CrudDemoApplication {
 
 	private void deleteInstructor(ApplicationDAO appDAO) {
 		int id = 1;
-		appDAO.deleteById(id);
+		appDAO.deleteInstructorById(id);
 		System.out.println("removed. ");
 	}
 }

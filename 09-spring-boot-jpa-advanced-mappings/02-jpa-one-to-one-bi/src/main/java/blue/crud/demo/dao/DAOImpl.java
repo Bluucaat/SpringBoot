@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class DAOImpl implements ApplicationDAO{
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Autowired
     public DAOImpl(EntityManager entityManager) {
@@ -30,12 +30,20 @@ public class DAOImpl implements ApplicationDAO{
 
     @Override
     @Transactional
-    public void deleteById(int id) {
+    public void deleteInstructorById(int id) {
         entityManager.remove(findById(id));
     }
 
     @Override
     public InstructorDetail findDetailById(int id) {
         return entityManager.find(InstructorDetail.class, id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteInstructorDetailById(int id) {
+        InstructorDetail instructorDetail = entityManager.find(InstructorDetail.class, id);
+        instructorDetail.getInstructor().setInstructorDetail(null);
+        entityManager.remove(instructorDetail);
     }
 }
