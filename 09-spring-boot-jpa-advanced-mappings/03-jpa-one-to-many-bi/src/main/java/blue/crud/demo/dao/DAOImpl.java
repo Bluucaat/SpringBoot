@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public class DAOImpl implements ApplicationDAO{
+public class DAOImpl implements ApplicationDAO {
     private final EntityManager entityManager;
 
     @Autowired
@@ -57,5 +57,17 @@ public class DAOImpl implements ApplicationDAO{
                 "from Course where instructor.id=:data", Course.class);
         query.setParameter("data", id);
         return query.getResultList();
+    }
+
+    @Override
+    public Instructor findInstructorByIdJoinFetch(int id) {
+        TypedQuery<Instructor> query = entityManager.createQuery(
+                "select i from Instructor i "
+                        + "JOIN FETCH i.courses "
+                        + "JOIN FETCH i.instructorDetail "
+                        + "where i.id=:data", Instructor.class
+        );
+        query.setParameter("data", id);
+        return query.getSingleResult();
     }
 }
