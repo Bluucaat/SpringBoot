@@ -24,8 +24,24 @@ public class CrudDemoApplication {
             //createInstructorWithCourses(appDAO);
             //findInstructorWithCourses(appDAO);
             //findCoursesForInstructor(appDAO);
-            findInstructorWithCoursesJoinFetch(appDAO);
+            //findInstructorWithCoursesJoinFetch(appDAO);
+            updateInstructor(appDAO);
+            updateCourse(appDAO);
         };
+    }
+
+    private void updateCourse(ApplicationDAO appDAO) {
+        int id = 10;
+        Course course = appDAO.findCourseById(id);
+        course.setTitle("Edited course");
+        appDAO.updateCourse(course);
+    }
+
+    private void updateInstructor(ApplicationDAO appDAO) {
+        int id = 1;
+        Instructor instructor = appDAO.findById(id);
+        instructor.setEmail("newmail.com");
+        appDAO.updateInstructor(instructor);
     }
 
     private void findInstructorWithCoursesJoinFetch(ApplicationDAO appDAO) {
