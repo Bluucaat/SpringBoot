@@ -10,7 +10,6 @@ public interface ApplicationDAO {
     void save(Instructor instructor);
 
     Instructor findById(int id);
-    void deleteInstructorById(int id);
     InstructorDetail findDetailById(int id);
     void deleteInstructorDetailById(int id);
     List<Course> findCoursesByInstructorId(int id);
@@ -18,4 +17,6 @@ public interface ApplicationDAO {
     void updateInstructor(Instructor instructor);
     Course findCourseById(int id);
     void updateCourse(Course course);
+    void deleteInstructorById(int id);
+    void deleteCourseById(int id);
 }

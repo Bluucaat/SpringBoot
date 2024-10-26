@@ -33,12 +33,6 @@ public class DAOImpl implements ApplicationDAO {
     }
 
     @Override
-    @Transactional
-    public void deleteInstructorById(int id) {
-        entityManager.remove(findById(id));
-    }
-
-    @Override
     public InstructorDetail findDetailById(int id) {
         return entityManager.find(InstructorDetail.class, id);
     }
@@ -87,5 +81,23 @@ public class DAOImpl implements ApplicationDAO {
     @Transactional
     public void updateCourse(Course course) {
         entityManager.merge(course);
+    }
+
+    @Override
+    @Transactional
+    public void deleteInstructorById(int id){
+        Instructor instructor = entityManager.find(Instructor.class, id);
+        List<Course> courseList = instructor.getCourses();
+        for(Course course : courseList){
+            course.setInstructor(null);
+        }
+        entityManager.remove(instructor);
+    }
+
+    @Override
+    @Transactional
+    public void deleteCourseById(int id) {
+        Course course = this.findCourseById(id);
+        entityManager.remove(course);
     }
 }
