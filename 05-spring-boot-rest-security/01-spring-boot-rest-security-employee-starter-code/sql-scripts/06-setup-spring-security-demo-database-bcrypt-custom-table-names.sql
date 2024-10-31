@@ -1,4 +1,4 @@
-USE `employee_directory`;
+USE `TypeTeam`;
 
 DROP TABLE IF EXISTS `roles`;
 DROP TABLE IF EXISTS `members`;
@@ -9,31 +9,17 @@ DROP TABLE IF EXISTS `members`;
 
 CREATE TABLE `members` (
   `user_id` varchar(50) NOT NULL,
-  `pw` char(68) NOT NULL,
+  `pw` char(75) NOT NULL,
   `active` tinyint NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Inserting data for table `members`
---
--- NOTE: The passwords are encrypted using BCrypt
---
--- A generation tool is avail at: https://www.luv2code.com/generate-bcrypt-password
---
--- Default passwords here are: fun123
---
 
 INSERT INTO `members`
 VALUES
-('john','{bcrypt}$2a$10$qeS0HEh7urweMojsnwNAR.vcXJeXR1UcMRZ2WcGQl9YeuspUdgF.q',1),
-('mary','{bcrypt}$2a$10$qeS0HEh7urweMojsnwNAR.vcXJeXR1UcMRZ2WcGQl9YeuspUdgF.q',1),
-('susan','{bcrypt}$2a$10$qeS0HEh7urweMojsnwNAR.vcXJeXR1UcMRZ2WcGQl9YeuspUdgF.q',1);
+('bluu','{bcrypt}$2a$12$Lz/mcYZHc1D5kl1VaTYJouop8O/.MQvMRp2pexvZuY8v1cm9n55qu', 1),
+('test','{bcrypt}$2a$12$HOGVXlx090ksYZx5IjB/XuD752mpjkx2XZf7A0zT.7nkBlZvNtnvC', 1);
 
-
---
--- Table structure for table `authorities`
---
 
 CREATE TABLE `roles` (
   `user_id` varchar(50) NOT NULL,
@@ -42,15 +28,9 @@ CREATE TABLE `roles` (
   CONSTRAINT `authorities5_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `members` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Inserting data for table `roles`
---
 
 INSERT INTO `roles`
 VALUES
-('john','ROLE_EMPLOYEE'),
-('mary','ROLE_EMPLOYEE'),
-('mary','ROLE_MANAGER'),
-('susan','ROLE_EMPLOYEE'),
-('susan','ROLE_MANAGER'),
-('susan','ROLE_ADMIN');
+('bluu','USER'),
+('test','USER')
+
