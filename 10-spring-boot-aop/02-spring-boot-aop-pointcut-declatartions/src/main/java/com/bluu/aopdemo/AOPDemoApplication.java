@@ -2,6 +2,7 @@ package com.bluu.aopdemo;
 
 import com.bluu.aopdemo.dao.AccountDAO;
 import com.bluu.aopdemo.dao.MembershipDAO;
+import com.bluu.aopdemo.service.TrafficFortuneService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,11 +16,25 @@ public class AOPDemoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(AccountDAO accountDAO, MembershipDAO membershipDAO) {
+	public CommandLineRunner commandLineRunner(AccountDAO accountDAO,
+											   MembershipDAO membershipDAO,
+											   TrafficFortuneService trafficFortuneService) {
 		return runner -> {
-			demoTheBeforeAdvice(accountDAO, membershipDAO);
+			//demoTheBeforeAdvice(accountDAO, membershipDAO);
+			//demoTheAroundAdvice(trafficFortuneService);
+			demoTheAroundAdviceRethrowException(trafficFortuneService);
 		};
 	}
+
+	private void demoTheAroundAdviceRethrowException(TrafficFortuneService trafficFortuneService) {
+		boolean tripWire = true;
+		System.out.println("My fortune is: " + trafficFortuneService.getFortune(true));
+	}
+
+	private void demoTheAroundAdvice(TrafficFortuneService trafficFortuneService) {
+		System.out.println("My fortune is: " + trafficFortuneService.getFortune());
+	}
+
 
 	private void demoTheBeforeAdvice(AccountDAO accountDAO, MembershipDAO membershipDAO) {
 		accountDAO.addAccount("name1", "email@mail.com");
